@@ -7,11 +7,12 @@ The first two files, New_Dropout.ipynb and Old_Dropout.ipynb, were used for deve
    &#xfeff;      | MNIST Numbers | MNIST Fashion
 -------------    | ------------- | -------------
 Old Dropout      | 5.59          | 15.23
-New Dropout      | 0.06          | 0.11
+New Dropout      | 0.00*         | 0.89
 Highest Reported | 0.17          | 3.09
 
-Yes there are smaller MNIST error rates using CNNs, data augmentation, preprocessing ect with a normal dropout layer but in this test the only variables changed were the dropout layer. 
-This alloud for a direct comparison between layers.
+Yes there are smaller MNIST error rates using CNNs, data augmentation, preprocessing ect with a normal dropout layer but in this test the only variables changed were the dropout layer. This alloud for a direct comparison between layers.
+
+ _*No images were miss-classified. Model trained on 10,000 images a validaiton on 10,000_
 
 ## Testing Methodology ##
 
@@ -19,7 +20,7 @@ With saving the model from the best epoch not set up I let every model run for 1
 
 ## To-Do ##
 
-- [ ] Partition training data so not testing is used during training
+- [X] Partition training data so not testing is used during training
 - [ ] Test Binary data
 - [ ] Test data in batches
 - [ ] Create confusion matrix
