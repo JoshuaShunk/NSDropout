@@ -12,6 +12,10 @@ New Dropout   | 0.06          | 0.11
 Yes there are smaller MNIST error rates using CNNs, data augmentation, preprocessing ect with a normal dropout layer but in this test the only variables changed were the dropout layer. 
 This alloud for a direct comparison between layers.
 
+## Testing Methodology ##
+
+With saving the model from the best epoch not set up I let every model run for 1000 epochs and recorded the epoch where it's validation accuracy was the highest. Thanks to setting the numpy seed I was able to run the training again and stop at the epoch where the model previously hit it's high.
+
 ## To-Do ##
 
 - [ ] Test Binary data
