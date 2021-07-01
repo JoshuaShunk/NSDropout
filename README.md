@@ -15,7 +15,7 @@ This alloud for a direct comparison between layers.
 
 ## Testing Methodology ##
 
-With saving the model from the best epoch not set up I let every model run for 1000 epochs and recorded the epoch where it's validation accuracy was the highest. Thanks to setting the numpy seed I was able to run the training again and stop at the epoch where the model previously hit it's high.
+With saving the model from the best epoch not set up I let every model run for 1000 epochs(both old dropout models' validation accuracy was decreasing at this point) and recorded the epoch where it's validation accuracy was the highest. Thanks to setting the numpy seed I was able to run the training again and stop at the epoch where the model previously hit it's high.
 
 ## To-Do ##
 
