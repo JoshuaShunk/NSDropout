@@ -19,7 +19,7 @@ With saving the model from the best epoch not set up I let every model run for 1
 
 ## To-Do ##
 
-- [ ] Partition training dat so not testing is used during training
+- [ ] Partition training data so not testing is used during training
 - [ ] Test Binary data
 - [ ] Test data in batches
 - [ ] Create confusion matrix
