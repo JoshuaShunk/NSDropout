@@ -10,9 +10,9 @@ Old Dropout             | 5.59          | 15.23
 New Dropout             | 0.00*         | 0.89
 Highest Reported[1] [2] | 0.13          | 3.09
 
-Yes there are smaller MNIST error rates using CNNs, data augmentation, preprocessing ect with a normal dropout layer but in this test the only variables changed were the dropout layer. This alloud for a direct comparison between layers.
+Yes there are smaller MNIST error rates using CNNs, data augmentation, preprocessing ect with a normal dropout layer but in this test the only variables changed were the dropout layer. This aloud for a direct comparison between layers and the improvments the new layer made.
 
- _*No images were miss-classified. Model trained on 9,600 images a validaiton on 10,000. Testing images were split up 8000 for optimization and 1600 for new dropout layer._
+ _*No images were miss-classified. Model trained on 9,600 images a validaiton on 10,000. Testing images were split up 8000 for optimization and 1600 for new dropout layer. See mnist_numbers_implementation_of_New_Dropout.ipynb for more information._
 
 ## Testing Methodology ##
 
@@ -20,7 +20,7 @@ With saving the model from the best epoch not set up I let every model run for 1
 
 ## To-Do ##
 
-- [X] Partition training data so not testing is used during training
+- [X] Partition training data so no testing data is used during training
 - [ ] Test Binary data
 - [ ] Test data in batches
 - [ ] Create confusion matrix
