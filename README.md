@@ -1,7 +1,7 @@
 # NSDropout (Neuron Specific Dropout)
 
 ## NOTE ##
-The first two files, New_Dropout.ipynb and Old_Dropout.ipynb, were used for development of initial layer and do not represent the accuracy of the most curent version.
+The first two files, New_Dropout.ipynb and Old_Dropout.ipynb, were used for the development of the initial layer and do not represent the accuracy of the most current version.
 
 ## Error rate (%) ##
 Error rate recored as 1 - accuracy.
@@ -11,17 +11,17 @@ Old Dropout             | 5.59          | 15.23
 New Dropout             | 0.00*         | 0.19
 Highest Reported[1] [2] | 0.13          | 3.09
 
-Yes there are smaller MNIST error rates using CNNs, data augmentation, preprocessing ect with a normal dropout layer but in this test the only variables changed were the dropout layer. This aloud for a direct comparison between layers and the improvments the new layer made.
+Yes, there are smaller MNIST error rates using CNNs, data augmentation, preprocessing, etc with a normal dropout layer but in this test the only variables changed were the dropout layer. This allowed for a direct comparison between layers and the improvements the new layer made.
 
- _*No images were miss-classified. Model trained on 9,600 images a validaiton on 10,000. Testing images were split up 8000 for optimization and 1600 for new dropout layer. See mnist_numbers_implementation_of_New_Dropout.ipynb for more information._
+ _*No images were miss-classified. The model trained on 9,600 images a validation on 10,000. Testing images were split up 8000 for optimization and 1600 for the new dropout layer. See mnist_numbers_implementation_of_New_Dropout.ipynb for more information._
 
 ## Testing Methodology ##
 
-With saving the model from the best epoch not set up I let every model run for 1000 epochs(both old dropout models' validation accuracy was decreasing at this point) and recorded the epoch where it's validation accuracy was the highest. Thanks to setting the numpy seed I was able to run the training again and stop at the epoch where the model previously hit it's high.
+With saving the model from the best epoch not set up I let every model run for 1000 epochs(both old dropout models' validation accuracy was decreasing at this point) and recorded the epoch where its validation accuracy was the highest. Thanks to setting the NumPy seed I was able to run the training again and stop at the epoch where the model previously hit its high.
 
 ## Development ##
 
-The goal of this layer was to take an input from the previous layer, the true values, the output of the validation data at the same location, and the true value of the validation data. Then sort the data into classes using the true values of training and validation. Next average the data of the classes and subtract the validation data from the training data. After that create a masking setting the highest X differences equal to 0 and the rest to 1 for each class. Finally apply the appropreate mask to each of the input values bases on their true mask. 
+The goal of this layer was to take an input from the previous layer, the true values, the output of the validation data at the same location, and the true value of the validation data. Then sort the data into classes using the true values of training and validation. Next average the data of the classes and subtract the validation data from the training data. After that, the model creates a mask setting the highest X differences equal to 0 and the rest to 1 for each class. Finally, apply the appropriate mask to each of the input values bases on their true mask. 
 
 #### Sorting inputed data into classes using dictionaries ####
 ```python
