@@ -12,7 +12,7 @@ Highest Reported | 0.17          | 3.09
 
 Yes there are smaller MNIST error rates using CNNs, data augmentation, preprocessing ect with a normal dropout layer but in this test the only variables changed were the dropout layer. This alloud for a direct comparison between layers.
 
- _*No images were miss-classified. Model trained on 9,600 images a validaiton on 10,000. Testing images were split up 8000 for optimization and 1600 for new dropout layer.
+ _*No images were miss-classified. Model trained on 9,600 images a validaiton on 10,000. Testing images were split up 8000 for optimization and 1600 for new dropout layer._
 
 ## Testing Methodology ##
 
