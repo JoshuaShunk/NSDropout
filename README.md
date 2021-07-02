@@ -4,6 +4,7 @@
 The first two files, New_Dropout.ipynb and Old_Dropout.ipynb, were used for development of initial layer and do not represent the accuracy of the most curent version.
 
 ## Error rate (%) ##
+Error rate recored as 1 - accuracy.
    &#xfeff;             | MNIST Numbers | MNIST Fashion
 -------------           | ------------- | -------------
 Old Dropout             | 5.59          | 15.23
