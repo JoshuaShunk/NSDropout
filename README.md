@@ -7,7 +7,7 @@ The first two files, New_Dropout.ipynb and Old_Dropout.ipynb, were used for deve
    &#xfeff;             | MNIST Numbers | MNIST Fashion
 -------------           | ------------- | -------------
 Old Dropout             | 5.59          | 15.23
-New Dropout             | 0.00*         | 0.89
+New Dropout             | 0.00*         | 0.19
 Highest Reported[1] [2] | 0.13          | 3.09
 
 Yes there are smaller MNIST error rates using CNNs, data augmentation, preprocessing ect with a normal dropout layer but in this test the only variables changed were the dropout layer. This aloud for a direct comparison between layers and the improvments the new layer made.
