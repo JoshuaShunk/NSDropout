@@ -65,6 +65,23 @@ for i, (input, label) in enumerate(zip(X,y)):
      if label == true:
        self.binary_mask[i] = self.diff_mask[diff]
 ```
+
+During testing, I noticed that validation or testing accuracy was never going up but training was. As one of my solutions to this problem, I decided to add an inference layer that takes the last used mask(eventually when saving the best model is implemented the mask that goes with that model) and applies it to the output of the previous layer when testing. The solution can be found below.
+```python
+ def infrence(self, input, label):
+     self.input = input
+     self.label = label
+     idx = np.argsort(self.label)
+     input_sorted = input[idx]
+     label_sorted = label[idx]
+     self.infrence_binary_mask = np.empty(shape=self.input.shape)
+     for i, (input, label) in enumerate(zip(self.input, self.label)):
+       for true, diff in enumerate(self.diff_mask):
+         if label == true:
+           self.infrence_binary_mask[i] = self.diff_mask[diff]
+
+     self.output = self.infrence_binary_mask * self.input
+```
 ## To-Do ##
 
 - [X] Partition training data so no testing data is used during training
