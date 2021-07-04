@@ -82,6 +82,21 @@ During testing, I noticed that validation or testing accuracy was never going up
 
      self.output = self.infrence_binary_mask * self.input
 ```
+## Deployment (curent state) ##
+
+Layer needs to be initialized by calling:
+```python
+dropout1 = Layer_CatagoricalNSDropout(rate)
+```
+Rate will be replaced by the percent of neurons you want to be turned off and 1 replaced by the number of dropout layers you have. Inside the training loop, the following needs to be called:
+```python
+dropout1.forward(X=activation1.output, y=y_train, X_test=cached_val_inputs, y_test=y_test)
+```
+Activation1.output will be replaced by the output of the layer right before, y_trian should be the true training values, cached_val_inputs will be the output of the same layer as where the dropout layer is placed. For example, if the new dropout layer is placed after activation1, X_test will be the output of activation1 when running a validation pass. Finally, y_test is the true values of the testing data. Unlike classical dropout, the new dropout layer requires a presence when inferencing. To do this call:
+```python
+dropout1.infrence(activation1.output,y_test)
+```
+
 ## To-Do ##
 
 - [X] Partition training data so no testing data is used during training
