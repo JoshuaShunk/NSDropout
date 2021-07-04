@@ -82,7 +82,7 @@ During testing, I noticed that validation or testing accuracy was never going up
 
      self.output = self.infrence_binary_mask * self.input
 ```
-## Deployment (curent state) ##
+## Deployment (current state) ##
 
 Layer needs to be initialized by calling:
 ```python
