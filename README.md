@@ -105,7 +105,7 @@ I'm currently working on testing CIFAR10, but more importantly, I'm working on c
 - [X] Partition training data so no testing data is used during training
 - [ ] Test Binary data
 - [ ] Test data in batches
-- [ ] Create confusion matrix
+- [X] Create confusion matrix
 - [ ] Understand fix sudden drops in accuracy
 - [ ] Test multiple layers
 
