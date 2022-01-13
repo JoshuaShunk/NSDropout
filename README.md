@@ -75,7 +75,6 @@ During testing, I noticed that validation or testing accuracy was never going up
 
       self.infrence_binary_mask = np.empty(shape=self.input.shape)
       for i, (input, label) in enumerate(zip(self.input, self.label)):
-        #for true, diff in zip(range(len(set(self.label))),self.diff_mask):
         for true, diff in enumerate(self.diff_mask):
           if label == true:
             self.infrence_binary_mask[i] = self.diff_mask[diff]
