@@ -7,9 +7,9 @@ The first two files, New_Dropout.ipynb and Old_Dropout.ipynb, were used for the 
 Error rate recored as 1 - accuracy.
 |   &#xfeff;             | MNIST Numbers | MNIST Fashion  | CIFAR-10
 |-------------           | ------------- | -------------  | ---------
-|Old Dropout             | 5.59          | 15.23          |  0
+|Old Dropout             | 5.59          | 15.23          |  48.78
 |New Dropout             | 0.00*         | 0.19           |  7.72
-|Highest Reported[1][2]  | 0.13          | 3.09           |  0
+|Highest Reported[1][2]  | 0.13          | 3.09           |  &#xfeff;
 
 Yes, there are smaller MNIST error rates using CNNs, data augmentation, preprocessing, etc with a normal dropout layer but in this test the only variables changed were the dropout layer. This allowed for a direct comparison between layers and the improvements the new layer made.
 
@@ -69,18 +69,23 @@ for i, (input, label) in enumerate(zip(X,y)):
 During testing, I noticed that validation or testing accuracy was never going up but training was. As one of my solutions to this problem, I decided to add an inference layer that takes the last used mask(eventually when saving the best model is implemented the mask that goes with that model) and applies it to the output of the previous layer when testing. The solution can be found below.
 ```python
  def infrence(self, input, label):
-     self.input = input
-     self.label = label
-     idx = np.argsort(self.label)
-     input_sorted = input[idx]
-     label_sorted = label[idx]
-     self.infrence_binary_mask = np.empty(shape=self.input.shape)
-     for i, (input, label) in enumerate(zip(self.input, self.label)):
-       for true, diff in enumerate(self.diff_mask):
-         if label == true:
-           self.infrence_binary_mask[i] = self.diff_mask[diff]
+    try:
+      self.input = input
+      self.label = label
 
-     self.output = self.infrence_binary_mask * self.input
+      self.infrence_binary_mask = np.empty(shape=self.input.shape)
+      for i, (input, label) in enumerate(zip(self.input, self.label)):
+        #for true, diff in zip(range(len(set(self.label))),self.diff_mask):
+        for true, diff in enumerate(self.diff_mask):
+          if label == true:
+            self.infrence_binary_mask[i] = self.diff_mask[diff]
+
+      self.output = self.infrence_binary_mask * self.input
+
+    except:
+      self.exeptions += 1
+      print(f'No Differnce Mask Found: Using input {self.exeptions}')
+      self.output = self.input
 ```
 ## Deployment (current state) ##
 
