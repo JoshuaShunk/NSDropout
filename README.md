@@ -108,12 +108,93 @@ I'm currently working on testing CIFAR10, but more importantly, I'm working on c
 
 - [X] Partition training data so no testing data is used during training
 - [ ] Test Binary data
-- [ ] Test data in batches
+- [X] Test data in batches
 - [X] Create confusion matrix
 - [ ] Understand fix sudden drops in accuracy
-- [ ] Test multiple layers
+- [X] Test multiple layers
 
 ## Refrences ##
 
 [1] https://paperswithcode.com/sota/image-classification-on-mnist \
 [2] https://paperswithcode.com/sota/image-classification-on-fashion-mnist
+
+## Full Layer Code ##
+```python
+class Layer_CatagoricalNSDropout:
+
+    # Init
+    def __init__(self, rate):
+        self.rate = rate
+        self.iterations = 0
+        self.exeptions = 0 
+
+
+    def forward(self, X_test, y_test, X, y):        
+        if self.iterations != 0:
+          #Adding sorted data into dictionaries 
+          sorted_x = {}
+          sorted_y = {}
+          for classes in range(len(set(y))):
+            sorted_x["class_{0}".format(classes)] = X[y == classes]
+            sorted_y["label_{0}".format(classes)] = y[y == classes]
+
+          sorted_x_test = {}
+          sorted_y_test = {}
+          for classes in range(len(set(y))):
+            sorted_x_test["class_{0}".format(classes)] = X_test[y_test == classes]
+            sorted_y_test["label_{0}".format(classes)] = y_test[y_test == classes]
+
+          #Averaging sorted data from each class then finding the difference between the averaged train and test inputs
+          differnce_classes = {}
+          for i, classes, test_classes in zip(range(len(set(y))), sorted_x, sorted_x_test):
+            differnce_classes["diff_{0}".format(i)] = np.mean(sorted_x[classes], axis=0) - np.mean(sorted_x_test[classes], axis=0)
+
+          #Masking the data taking the high values(greatest difference between train and test) and setting their values to 0
+          self.diff_mask = {}
+          for i, classes, test_classes, diff in zip(range(len(set(y))), sorted_x, sorted_x_test, differnce_classes):
+            ind = np.argpartition(differnce_classes[diff], -round(len(X[0]) * self.rate))[-round(len(X[0]) * self.rate):]
+            mask = np.ones(np.mean(sorted_x[classes],axis=0).shape, dtype=bool)
+            mask[ind] = False
+            differnce_classes[diff][~mask] = 0.
+            differnce_classes[diff][mask] = 1
+            self.diff_mask["mask_{0}".format(i)] = differnce_classes[diff]
+
+          #Goes through each input values and applies the apprioprite mask based on what the true output should be.
+          self.binary_mask = np.empty(shape=X.shape)
+          for i, (input, label) in enumerate(zip(X,y)): 
+            for true, diff in enumerate(self.diff_mask):
+              if label == true:
+                self.binary_mask[i] = self.diff_mask[diff]
+        else:
+          self.binary_mask = np.random.binomial(1, (1-self.rate), size=X.shape)
+        
+        self.cached_binary_mask = self.binary_mask
+        self.output = (self.binary_mask/(1-self.rate)) * X
+    def backward(self, dvalues):
+        # Gradient on values
+        self.dinputs = dvalues * self.binary_mask
+
+    def infrence(self, input, label):
+        try:
+          self.input = input
+          self.label = label
+
+          self.infrence_binary_mask = np.empty(shape=self.input.shape)
+          for i, (input, label) in enumerate(zip(self.input, self.label)):
+            #for true, diff in zip(range(len(set(self.label))),self.diff_mask):
+            for true, diff in enumerate(self.diff_mask):
+              if label == true:
+                self.infrence_binary_mask[i] = self.diff_mask[diff]
+
+          self.output = self.infrence_binary_mask * self.input
+
+        except:
+          self.exeptions += 1
+          print(f'No Differnce Mask Found: Using input {self.exeptions}')
+          self.output = self.input
+
+
+
+    def post_update_params(self):
+        self.iterations += 1
+```
