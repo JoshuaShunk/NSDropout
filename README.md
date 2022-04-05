@@ -102,16 +102,17 @@ dropout1.infrence(activation1.output,y_test)
 ```
 ## Future Testing ##
 
-I'm currently working on testing CIFAR10, but more importantly, I'm working on collecting more data and smoothing out data for better comparison between the current dropout layer and the new dropout layer as well as gain a deeper understanding of why the new layer makes prolonged drops inaccuracy. Once those issues are sorted out, I hope to migrate the layers into a more Keras/PyTorch-like model to make creating new models magnitudes easier. This includes adding a feature such as model.add(layer), model.predict(data), and training in batches. At that point, I will dive into where this layer improves over the existing layer and where it falls short, and if a variation could be used in NLP or active machine vision. 
+Development of a custom TensorFlow layer is currently underway. I'm working on collecting more data and smoothing out data for better comparison between the current dropout layer and the new dropout layer as well as gain a deeper understanding of why the new layer makes prolonged drops inaccuracy. Once those issues are sorted out, I hope to migrate the layers into a more Keras/PyTorch-like model to make creating new models magnitudes easier. This includes adding a feature such as model.add(layer), model.predict(data), and training in batches. At that point, I will dive into where this layer improves over the existing layer and where it falls short, and if a variation could be used in NLP or active machine vision. 
 
 ## To-Do ##
 
 - [X] Partition training data so no testing data is used during training
-- [ ] Test Binary data
+- [X] Test binary data
 - [X] Test data in batches
 - [X] Create confusion matrix
-- [ ] Understand fix sudden drops in accuracy
+- [X] Understand fix sudden drops in accuracy
 - [X] Test multiple layers
+- [ ] Create custom TensorFlow layer  
 
 ## Refrences ##
 
