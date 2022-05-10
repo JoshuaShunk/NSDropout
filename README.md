@@ -1,6 +1,8 @@
 # NSDropout (Neuron Specific Dropout)
 
 ## NOTE ##
+### Training using NSDropout runs the risk of the model being dependent on the mask given. Predicted class may become directly linked to the mask assigned. NSDropout is an expiremental approach to actively pruning a model. ###
+
 The first two files, New_Dropout.ipynb and Old_Dropout.ipynb, were used for the development of the initial layer and do not represent the accuracy of the most current version.
 
 ## Error rate (%) ##
